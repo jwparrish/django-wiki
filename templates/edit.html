@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_name }} - Editing{% endblock %}
+
+{% block content %}
+		<h3>Editing {{ page_name }}</h3>
+		<form method="post" action="/wiki/{{ page_name }}/save/">
+			{% csrf_token %}
+			<textarea name="content" row="20" cols="60">{{ content }}</textarea>
+			<br />
+			<input type="submit" value="Save Page"/>
+		</form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Search page{% endblock %}
+
+{% block content %}
+<h3>Search Page</h3>
+
+<form method="post" action=""> {% csrf_token %}
+	{{ form }}
+	<input type="submit" value="Search"/>
+</form>
+
+{% if pages %}
+	<h3>Search result for page name</h3>
+	<ul>
+	{% for page in pages %}
+		<li><a href="/wiki/{{ page.name|escape }}/">{{ page.name|escape }}</a></li>
+	{% endfor %}
+	</ul>
+{% endif %}
+
+{% if contents %}
+	<h3>Search result for page content</h3>
+	<ul>
+	{% for page in contents %}
+		<li><a href="/wiki/{{ page.name|escape }}/">{{ page.name|escape }}</a></li>
+	{% endfor %}
+	</ul>
+{% endif %}
+
+
+{% endblock %}

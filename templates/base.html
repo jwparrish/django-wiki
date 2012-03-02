@@ -1,0 +1,11 @@
+<html>
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+	</head>
+	<body>
+		<div>
+			Menu: <a href="/wiki/Start/">Start Page</a> | <a href="/wiki/SearchPage/">Search Page</a>
+		</div>
+		{% block content %}{% endblock %}
+	</body>
+</html>
