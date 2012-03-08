@@ -9,7 +9,7 @@
 		<br />
 		<p>Tags:
 		{% for tag in tags %}
-			{{ tag.name }}
+			<a href="/wiki/tag/{{ tag.name }}/">{{ tag.name }}</a>
 		{% endfor %}
 		</p>
 		<a href="/wiki/page/{{ page_name|escape }}/edit/">Edit this page?</a>

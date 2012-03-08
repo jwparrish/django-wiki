@@ -17,4 +17,5 @@ urlpatterns = patterns('',
     (r'^wiki/page/(?P<page_name>[^/]+)/edit/$', 'djwiki.wiki.views.edit_page'),
      (r'^wiki/page/(?P<page_name>[^/]+)/save/$', 'djwiki.wiki.views.save_page'),
      (r'^wiki/page/(?P<page_name>[^/]+)/$', 'djwiki.wiki.views.view_page'),
+     (r'^wiki/tag/(?P<tag_name>[^/]+)/$', 'djwiki.wiki.views.view_tag'),
 )
