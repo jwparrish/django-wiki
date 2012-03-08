@@ -8,7 +8,7 @@
 			{% csrf_token %}
 			<textarea name="content" rows="20" cols="80">{{ content }}</textarea>
 			<br />
-			Tags: <input name="tags" value="" maxlength="50" size="50"/><br />
+			Tags: <input name="tags" value="{{ tags }}" maxlength="50" size="50"/><br />
 			<input type="submit" value="Save Page"/>
 		</form>
 {% endblock %}

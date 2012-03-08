@@ -40,9 +40,11 @@ def edit_page(request, page_name):
 	try:
 		page = Page.objects.get(pk=page_name)
 		content = page.content
+		tags = " ".join([tag.name for tag in page.tags.all()])
 	except Page.DoesNotExist:
 		content = ""
-	return render_to_response("edit.html", {"page_name": page_name, "content": content}, RequestContext(request))
+		tags = ""
+	return render_to_response("edit.html", {"page_name": page_name, "content": content, "tags": tags}, RequestContext(request))
 	
 def save_page(request, page_name):
 	content = request.POST["content"]
