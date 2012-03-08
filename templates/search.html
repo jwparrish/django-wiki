@@ -14,7 +14,7 @@
 	<h3>Search result for page name</h3>
 	<ul>
 	{% for page in pages %}
-		<li><a href="/wiki/{{ page.name|escape }}/">{{ page.name|escape }}</a></li>
+		<li><a href="/wiki/page/{{ page.name|escape }}/">{{ page.name|escape }}</a></li>
 	{% endfor %}
 	</ul>
 {% endif %}
@@ -23,7 +23,7 @@
 	<h3>Search result for page content</h3>
 	<ul>
 	{% for page in contents %}
-		<li><a href="/wiki/{{ page.name|escape }}/">{{ page.name|escape }}</a></li>
+		<li><a href="/wiki/page/{{ page.name|escape }}/">{{ page.name|escape }}</a></li>
 	{% endfor %}
 	</ul>
 {% endif %}

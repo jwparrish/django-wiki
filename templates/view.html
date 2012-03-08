@@ -7,5 +7,10 @@
 		<h3>{{ page_name }}</h3>
 		{{ content }}
 		<br />
-		<a href="/wiki/{{ page_name|escape }}/edit/">Edit this page?</a>
+		<p>Tags:
+		{% for tag in tags %}
+			{{ tag.name }}
+		{% endfor %}
+		</p>
+		<a href="/wiki/page/{{ page_name|escape }}/edit/">Edit this page?</a>
 {% endblock %}

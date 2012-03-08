@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    (r'^wiki/(?P<page_name>[^/]+)/edit/$', 'djwiki.wiki.views.edit_page'),
-     (r'^wiki/(?P<page_name>[^/]+)/save/$', 'djwiki.wiki.views.save_page'),
-     (r'^wiki/(?P<page_name>[^/]+)/$', 'djwiki.wiki.views.view_page'),
+    (r'^wiki/page/(?P<page_name>[^/]+)/edit/$', 'djwiki.wiki.views.edit_page'),
+     (r'^wiki/page/(?P<page_name>[^/]+)/save/$', 'djwiki.wiki.views.save_page'),
+     (r'^wiki/page/(?P<page_name>[^/]+)/$', 'djwiki.wiki.views.view_page'),
 )
