@@ -1,0 +1,16 @@
+#container {
+	min-width:300px;
+}
+
+#titlebar {
+	outline: 1px solid #000;
+	height: 50px;
+}
+
+#nav {
+	float: right;
+}
+
+#content {
+	padding-top: 10px;
+}

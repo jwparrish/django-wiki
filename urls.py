@@ -1,4 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
+import os.path
+
+site_media = os.path.join(os.path.dirname(__file__), 'site_media')
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -18,4 +21,5 @@ urlpatterns = patterns('',
      (r'^wiki/page/(?P<page_name>[^/]+)/save/$', 'djwiki.wiki.views.save_page'),
      (r'^wiki/page/(?P<page_name>[^/]+)/$', 'djwiki.wiki.views.view_page'),
      (r'^wiki/tag/(?P<tag_name>[^/]+)/$', 'djwiki.wiki.views.view_tag'),
+     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', { 'document_root': site_media }),
 )

@@ -8,15 +8,16 @@
 		<link rel="stylesheet" href="/site_media/style.css" type="text/css" media="screen, projection" />
 	</head>
 	<body>
-		<div>
-			Menu: <a href="/wiki/page/Start/">Start Page</a> | <a href="/wiki/page/SearchPage/">Search Page</a>
+		<div id="container">
+			<div id="titlebar">
+				VCPIwiki v.034b
+				<div id="nav">
+					Menu: <a href="/wiki/page/Start/">Start Page</a> | <a href="/wiki/page/SearchPage/">Search Page</a>
+				</div>
+			</div>
+			<div id="content">
+				{% block content %}{% endblock %}
+			</div>
 		</div>
-		{% block content %}{% endblock %}
 	</body>
 </html>
-
-
-		<link rel="stylesheet" href="/site_media/blueprint/screen.css" type="text/css" media="screen, projection" />
-		<link rel="stylesheet" href="/site_media/blueprint/print.css" type="text/css" media="print" />
-		<!--[if IE]><link rel="stylesheet" href="/site_media/blueprint/ie.css" type="text/css" media="screen, projection" /><![endif]-->
-		<link rel="stylesheet" href="/site_media/style.css" type="text/css" media="screen, projection" />
