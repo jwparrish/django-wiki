@@ -1,16 +1,36 @@
 #container {
-	min-width:300px;
+	min-width:600px;
+	position: relative;
 }
 
 #titlebar {
-	outline: 1px solid #000;
 	height: 50px;
 }
 
 #nav {
 	float: right;
+	padding: 10px 10px 0 10px;
 }
 
 #content {
 	padding-top: 10px;
+	
+}
+
+#tagsbar {
+	float: right;
+	width: 200px;
+	margin: 0 40px 0 0;
+}
+
+hr {
+	height: 5px;
+	background-color: #000;
+	margin: 20px 0 0px 0;
+}
+
+.maincontent {
+	margin: 0 10px 0 10px;
+	float: left;
+	width: 600px;
 }

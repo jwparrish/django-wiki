@@ -4,13 +4,19 @@
 {% block title %}{{ page_name }}{% endblock %}
 
 {% block content %}
+	<div class="maincontent">
 		<h3>{{ page_name }}</h3>
 		{{ content }}
 		<br />
-		<p>Tags:
-		{% for tag in tags %}
-			<a href="/wiki/tag/{{ tag.name }}/">{{ tag.name }}</a>
-		{% endfor %}
-		</p>
+	</div>
+		<div id="tagsbar">
+			<p>Tags:
+			<br />
+			{% for tag in tags %}
+				<a href="/wiki/tag/{{ tag.name }}/">{{ tag.name }}</a>
+			{% endfor %}
+			</p>
+		</div>
+		<div style="clear:both"></div>
 		<a href="/wiki/page/{{ page_name|escape }}/edit/">Edit this page?</a>
 {% endblock %}
