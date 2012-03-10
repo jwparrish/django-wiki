@@ -5,7 +5,7 @@ from django.template import RequestContext
 from django import forms
 
 class SearchForm(forms.Form):
-	text = forms.CharField(label="Enter search term")
+	text = forms.CharField(label="")
 	search_content = forms.BooleanField(label="Search content", required=False)
 
 def search_page(request):
@@ -26,15 +26,26 @@ def search_page(request):
 specialPages = {"SearchPage": search_page}
 
 def view_page(request, page_name):
+	if request.method == "POST":
+		f = SearchForm(request.POST)
+		if not f.is_valid():
+			return render_to_response("view.html", {"page_name": page_name, "content":content, "tags":tags, "form":f}, RequestContext(request))
+		else:
+			pages = Page.objects.filter(name__contains = f.cleaned_data["text"])
+			contents = []
+			if f.cleaned_data["search_content"]:
+				contents = Page.objects.filter(content__contains = f.cleaned_data["text"])
+			return render_to_response("search.html", {"form":f, "pages":pages, "contents":contents}, RequestContext(request))
 	if page_name in specialPages:
 		return specialPages[page_name](request)
+	f = SearchForm()
 	try:
 		page = Page.objects.get(pk=page_name)
 		tags = page.tags.all()
 	except Page.DoesNotExist:
 		return render_to_response("create.html", {"page_name": page_name})
 	content = page.content
-	return render_to_response("view.html", {"page_name": page_name, "content": content, "tags": tags})
+	return render_to_response("view.html", {"page_name": page_name, "content": content, "tags": tags, "form":f}, RequestContext(request))
 		
 def edit_page(request, page_name):
 	try:

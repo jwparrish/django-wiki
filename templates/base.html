@@ -14,6 +14,14 @@
 				<div id="nav">
 					<span class="label">Menu:</span> <a href="/wiki/page/Start/">Start Page</a> | <a href="/wiki/page/SearchPage/">Search Page</a>
 				</div>
+				
+				<div id="searchbar">
+					<form method="post" action="">{% csrf_token %}
+						<input type="submit" value="Search" />
+						{{ form }}
+					</form>
+				</div>
+				
 			</div>
 			<div id="content">
 				{% block content %}{% endblock %}

@@ -1,6 +1,5 @@
 #container {
 	min-width:600px;
-	position: relative;
 }
 
 #titlebar {
@@ -37,6 +36,7 @@ hr {
 }
 
 .logo {
+	float: left;
 	color: #FFF;
 	font-weight: bold;
 	font-size: 150%;
@@ -45,4 +45,8 @@ hr {
 .label {
 	color: #FFF;
 	font-weight: bold;
+}
+
+#searchbar {
+	float: right;
 }
