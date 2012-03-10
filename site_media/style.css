@@ -5,6 +5,7 @@
 
 #titlebar {
 	height: 50px;
+	background-color: #000;
 }
 
 #nav {
@@ -33,4 +34,15 @@ hr {
 	margin: 0 10px 0 10px;
 	float: left;
 	width: 600px;
+}
+
+.logo {
+	color: #FFF;
+	font-weight: bold;
+	font-size: 150%;
+}
+
+.label {
+	color: #FFF;
+	font-weight: bold;
 }
