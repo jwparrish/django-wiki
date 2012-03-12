@@ -37,14 +37,15 @@ def view_page(request, page_name):
 	if request.method == "POST":
 		f = SearchForm(request.POST)
 		if not f.is_valid():
-			return render_to_response("view.html", {"page_name": page_name, "content":content, "tags":tags, "form":f}, RequestContext(request))
+			return render_to_response("view.html", {"page_name": page_name,"form":f}, RequestContext(request))
 		else:
 			pages = Page.objects.filter(name__contains = f.cleaned_data["text"])
-			if pages.exists():
-				contents = []
-				if f.cleaned_data["search_content"]:
-					contents = Page.objects.filter(content__contains = f.cleaned_data["text"])
-				return render_to_response("search.html", {"form": f, "pages":pages, "contents":contents}, RequestContext(request))
+			if f.cleaned_data["search_content"]:
+				contents = Page.objects.filter(content__contains = f.cleaned_data["text"])
+			else:
+				contents = Page.objects.none()
+			if pages.exists() or contents.exists():
+				return render_to_response("search.html", {"form": f, "pages":pages, "contents": contents}, RequestContext(request))
 			else:
 				f = SearchForm()
 				show_searchbox = True
