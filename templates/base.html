@@ -10,23 +10,16 @@
 	<body>
 		<div id="container">
 			<div id="titlebar">
-				<span class="logo">VCPIwiki v.034b</span>
+				<span class="logo">wiki v.034b</span>
 				<div id="nav">
 					<span class="label">Menu:</span> <a href="/wiki/page/Start/">Start Page</a> | <a href="/wiki/page/SearchPage/">Search Page</a>
 				</div>
 				
 				<div id="searchbar">
-					{% if sb %}
-						<form method="post" action="">{% csrf_token %}
-							<input type="submit" value="Search" />
-							{{ sb }}
-						</form>
-					{% else %}
-						<form method="post" action="">{% csrf_token %}
-							<input type="submit" value="Search" />
-							{{ sb }}
-						</form>
-					{% endif %}
+					<form method="post" action="" style="color:#FFF;">{% csrf_token %}
+						<input type="submit" value="Search" />
+						{{ form }}
+					</form>
 				</div>
 				
 			</div>
