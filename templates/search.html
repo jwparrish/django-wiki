@@ -3,15 +3,17 @@
 {% block title %}Search page{% endblock %}
 
 {% block content %}
+{% if show_searchbox %}
 <h3>Search Page</h3>
 
-<form method="post" action=""> {% csrf_token %}
-	{{ form }}
-	<input type="submit" value="Search"/>
-</form>
+	<form method="post" action=""> {% csrf_token %}
+		{{ form }}
+		<input type="submit" value="Search"/>
+	</form>
+{% endif %}
 
 {% if pages %}
-	<h3>Search result for page name</h3>
+	<h3>Search results for page name</h3>
 	<ul>
 	{% for page in pages %}
 		<li><a href="/wiki/page/{{ page.name|escape }}/">{{ page.name|escape }}</a></li>
@@ -20,7 +22,7 @@
 {% endif %}
 
 {% if contents %}
-	<h3>Search result for page content</h3>
+	<h3>Search results for page content</h3>
 	<ul>
 	{% for page in contents %}
 		<li><a href="/wiki/page/{{ page.name|escape }}/">{{ page.name|escape }}</a></li>
