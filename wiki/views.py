@@ -3,13 +3,13 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django import forms
-from django.core.exceptions import ObjectDoesNotExist
 
+# Search Form
 class SearchForm(forms.Form):
 	text = forms.CharField(label="")
 	search_content = forms.BooleanField(label="Search content", required=False)
 
-"""
+""" LEGACY
 def search_page(request):
 	if request.method == "POST":
 		f = SearchForm(request.POST)
@@ -47,11 +47,16 @@ def view_page(request, page_name):
 		page = Page.objects.get(pk=page_name)
 		tags = page.tags.all()
 	except Page.DoesNotExist:
-		return render_to_response("create.html", {"page_name": page_name})
+		return render_to_response("create.html", {"page_name": page_name, "form":f}, RequestContext(request))
 	content = page.content
 	return render_to_response("view.html", {"page_name": page_name, "content": content, "tags": tags, "form":f}, RequestContext(request))
 		
 def edit_page(request, page_name):
+	if request.method == "POST":
+		f = SearchForm(request.POST)
+		variables = search_page(request, f)
+		return render_to_response("search.html", variables)
+	f = SearchForm()
 	try:
 		page = Page.objects.get(pk=page_name)
 		content = page.content
@@ -59,7 +64,7 @@ def edit_page(request, page_name):
 	except Page.DoesNotExist:
 		content = ""
 		tags = ""
-	return render_to_response("edit.html", {"page_name": page_name, "content": content, "tags": tags}, RequestContext(request))
+	return render_to_response("edit.html", {"page_name": page_name, "content": content, "tags": tags, "form":f}, RequestContext(request))
 	
 def save_page(request, page_name):
 	content = request.POST["content"]
@@ -82,12 +87,16 @@ def save_page(request, page_name):
 	return HttpResponseRedirect("/wiki/page/" + page_name + "/")
 	
 def view_tag(request, tag_name):
+	if request.method == "POST":
+		f = SearchForm(request.POST)
+		variables = search_page(request, f)
+		return render_to_response("search.html", variables)
+	f = SearchForm()
 	tag = Tag.objects.get(pk=tag_name)
 	pages = tag.page_set.all()
-	return render_to_response("tags.html", {"tag_name": tag_name, "pages": pages})
+	return render_to_response("tags.html", {"tag_name": tag_name, "pages": pages, "form": f}, RequestContext(request))
 	
-def search_page(request, f):
-	
+def search_page(request, f):	
 	if not f.is_valid():
 		show_searchbox = True
 		variables = RequestContext(request, {
