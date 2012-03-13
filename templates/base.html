@@ -18,7 +18,9 @@
 				<div id="searchbar">
 					<form method="post" action="" style="color:#FFF;">{% csrf_token %}
 						<input type="submit" value="Search" />
-						{{ form }}
+						{{ form.text }}
+						{{ form.search_content.label }}
+						{{ form.search_content }}
 					</form>
 				</div>
 				

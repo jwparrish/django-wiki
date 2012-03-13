@@ -37,7 +37,8 @@ def view_page(request, page_name):
 	if request.method == "POST":
 		f = SearchForm(request.POST)
 		if not f.is_valid():
-			return render_to_response("view.html", {"page_name": page_name,"form":f}, RequestContext(request))
+			show_searchbox = True
+			return render_to_response("search.html", {"show_searchbox": show_searchbox, "form":f}, RequestContext(request))
 		else:
 			pages = Page.objects.filter(name__contains = f.cleaned_data["text"])
 			if f.cleaned_data["search_content"]:
@@ -54,6 +55,7 @@ def view_page(request, page_name):
 	
 	if page_name in specialPages:
 		return specialPages[page_name](request)
+	
 	f = SearchForm()
 	try:
 		page = Page.objects.get(pk=page_name)

@@ -50,3 +50,7 @@ hr {
 #searchbar {
 	float: right;
 }
+
+.errorlist li{
+	color: #F00;
+}

@@ -7,7 +7,9 @@
 <h3>Search Page</h3>
 
 	<form method="post" action=""> {% csrf_token %}
-		{{ form }}
+		{{ form.text }}
+		{{ form.search_content.label }}
+		{{ form.search_content }}
 		<input type="submit" value="Search"/>
 	</form>
 {% endif %}
