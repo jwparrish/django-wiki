@@ -9,6 +9,7 @@ class SearchForm(forms.Form):
 	text = forms.CharField(label="")
 	search_content = forms.BooleanField(label="Search content", required=False)
 
+"""
 def search_page(request):
 	if request.method == "POST":
 		f = SearchForm(request.POST)
@@ -30,31 +31,16 @@ def search_page(request):
 	f = SearchForm()
 	show_searchbox = True
 	return render_to_response("search.html", {"show_searchbox": show_searchbox, "form":f}, RequestContext(request))
-
-specialPages = {"SearchPage": search_page}
+"""	
+#specialPages = {"SearchPage": search_page}
 
 def view_page(request, page_name):
 	if request.method == "POST":
 		f = SearchForm(request.POST)
-		if not f.is_valid():
-			show_searchbox = True
-			return render_to_response("search.html", {"show_searchbox": show_searchbox, "form":f}, RequestContext(request))
-		else:
-			pages = Page.objects.filter(name__contains = f.cleaned_data["text"])
-			if f.cleaned_data["search_content"]:
-				contents = Page.objects.filter(content__contains = f.cleaned_data["text"])
-			else:
-				contents = Page.objects.none()
-			if pages.exists() or contents.exists():
-				return render_to_response("search.html", {"form": f, "pages":pages, "contents": contents}, RequestContext(request))
-			else:
-				f = SearchForm()
-				show_searchbox = True
-				noresults = True
-				return render_to_response("search.html", {"noresults": noresults, "show_searchbox": show_searchbox, "form":f}, RequestContext(request))
-	
-	if page_name in specialPages:
-		return specialPages[page_name](request)
+		variables = search_page(request, f)
+		return render_to_response("search.html", variables)
+	#if page_name in specialPages:
+	#	return specialPages[page_name](request)
 	
 	f = SearchForm()
 	try:
@@ -99,3 +85,36 @@ def view_tag(request, tag_name):
 	tag = Tag.objects.get(pk=tag_name)
 	pages = tag.page_set.all()
 	return render_to_response("tags.html", {"tag_name": tag_name, "pages": pages})
+	
+def search_page(request, f):
+	
+	if not f.is_valid():
+		show_searchbox = True
+		variables = RequestContext(request, {
+			"show_searchbox": show_searchbox,
+			"form": f
+		})
+		return variables
+	else:
+		pages = Page.objects.filter(name__contains = f.cleaned_data["text"])
+		if f.cleaned_data["search_content"]:
+			contents = Page.objects.filter(content__contains = f.cleaned_data["text"])
+		else:
+			contents = Page.objects.none()
+		if pages.exists() or contents.exists():
+			variables = RequestContext(request, {
+				"form": f,
+				"pages": pages,
+				"contents": contents
+			})
+			return variables
+		else:
+			f = SearchForm()
+			show_searchbox = True
+			noresults = True
+			variables = RequestContext(request, {
+				"noresults": noresults,
+				"show_searchbox": show_searchbox,
+				"form": f
+			})
+			return variables
