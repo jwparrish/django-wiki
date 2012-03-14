@@ -8,6 +8,9 @@ from django import forms
 class SearchForm(forms.Form):
 	text = forms.CharField(label="")
 	search_content = forms.BooleanField(label="Search content", required=False)
+	
+class NewPageForm(forms.Form):
+	text = forms.CharField(label="Create Page:")
 
 """ LEGACY
 def search_page(request):
@@ -43,13 +46,14 @@ def view_page(request, page_name):
 	#	return specialPages[page_name](request)
 	
 	f = SearchForm()
+	np = NewPageForm()
 	try:
 		page = Page.objects.get(pk=page_name)
 		tags = page.tags.all()
 	except Page.DoesNotExist:
-		return render_to_response("create.html", {"page_name": page_name, "form":f}, RequestContext(request))
+		return render_to_response("create.html", {"page_name": page_name, "form":f, "newpageform": np}, RequestContext(request))
 	content = page.content
-	return render_to_response("view.html", {"page_name": page_name, "content": content, "tags": tags, "form":f}, RequestContext(request))
+	return render_to_response("view.html", {"page_name": page_name, "content": content, "tags": tags, "form":f, "newpageform": np}, RequestContext(request))
 		
 def edit_page(request, page_name):
 	if request.method == "POST":
