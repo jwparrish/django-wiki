@@ -10,7 +10,7 @@ class SearchForm(forms.Form):
 	search_content = forms.BooleanField(label="Search content", required=False)
 	
 class NewPageForm(forms.Form):
-	text = forms.CharField(label="Create Page:", max_length=50)
+	text = forms.CharField(label="Create Page:", max_length=100)
 
 """ LEGACY
 def search_page(request):
@@ -43,8 +43,22 @@ def view_page(request, page_name):
 			f = SearchForm(request.POST)
 			variables = search_page(request, f)
 			return render_to_response("search.html", variables)
+		elif "newpage" in request.POST:
+			f = SearchForm(request.POST)
+			np = NewPageForm()
+			newpagename = request.POST["text"]
+			try: 
+				page= Page.objects.get(pk=newpagename)
+				tags = page.tags.all()
+				content = page.content
+				return render_to_response("view.html", {"page_name" : newpagename, "content": content, "tags":tags, "form":f, "newpageform": np}, RequestContext(request))
+			except Page.DoesNotExist:
+				return render_to_response("create.html", {"newpagename": newpagename, "form": f, "newpageform": np}, RequestContext(request))
+				
+			
 	#if page_name in specialPages:
 	#	return specialPages[page_name](request)
+	
 	
 	f = SearchForm()
 	np = NewPageForm()

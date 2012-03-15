@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %}{{ page_name }} - Create{% endblock %}
+{% block title %}{{ newpagename }} - Create{% endblock %}
 
 {% block content %}
-		<h3>{{ page_name|escape }}</h3>
-		This page does not exist. <a href="/wiki/page/{{ page_name }}/edit/">Create?</a>
+		<h3>{{ newpagename|escape }}</h3>
+		This page does not exist. <a href="/wiki/page/{{ newpagename }}/edit/">Create?</a>
 {% endblock %}
