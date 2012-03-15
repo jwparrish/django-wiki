@@ -10,7 +10,7 @@ class SearchForm(forms.Form):
 	search_content = forms.BooleanField(label="Search content", required=False)
 	
 class NewPageForm(forms.Form):
-	text = forms.CharField(label="Create Page:")
+	text = forms.CharField(label="Create Page:", max_length=50)
 
 """ LEGACY
 def search_page(request):
@@ -39,9 +39,10 @@ def search_page(request):
 
 def view_page(request, page_name):
 	if request.method == "POST":
-		f = SearchForm(request.POST)
-		variables = search_page(request, f)
-		return render_to_response("search.html", variables)
+		if "searchbar" in request.POST:
+			f = SearchForm(request.POST)
+			variables = search_page(request, f)
+			return render_to_response("search.html", variables)
 	#if page_name in specialPages:
 	#	return specialPages[page_name](request)
 	
@@ -57,9 +58,10 @@ def view_page(request, page_name):
 		
 def edit_page(request, page_name):
 	if request.method == "POST":
-		f = SearchForm(request.POST)
-		variables = search_page(request, f)
-		return render_to_response("search.html", variables)
+		if "searchbar" in request.POST:
+			f = SearchForm(request.POST)
+			variables = search_page(request, f)
+			return render_to_response("search.html", variables)
 	f = SearchForm()
 	try:
 		page = Page.objects.get(pk=page_name)
@@ -92,9 +94,10 @@ def save_page(request, page_name):
 	
 def view_tag(request, tag_name):
 	if request.method == "POST":
-		f = SearchForm(request.POST)
-		variables = search_page(request, f)
-		return render_to_response("search.html", variables)
+		if "searchbar" in request.POST:
+			f = SearchForm(request.POST)
+			variables = search_page(request, f)
+			return render_to_response("search.html", variables)
 	f = SearchForm()
 	tag = Tag.objects.get(pk=tag_name)
 	pages = tag.page_set.all()

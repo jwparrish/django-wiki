@@ -5,7 +5,7 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$("body #content").click(function() {
+	$(".cancelbutton").click(function() {
 		$("#newpagedialog").hide();
 		return false;
 	});

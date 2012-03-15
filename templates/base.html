@@ -18,14 +18,15 @@
 				</div>
 				<div><a href="#" class="addpagebutton" style="text-decoration:none;">Add Page</a></div>
 				<div id="newpagedialog">
-					<form method="post" action="" style="color:#FFF;">{% csrf_token %}
+					<form method="post" action="">{% csrf_token %}
+						<span class="cancelbutton">cancel</span>
 						{{ newpageform }}
 					</form>
 				</div>
 				
 				<div id="searchbar">
 					<form method="post" action="" style="color:#FFF;">{% csrf_token %}
-						<input type="submit" value="Search" />
+						<input type="submit" name="searchbar" value="Search" />
 						{{ form.text }}
 						{{ form.search_content.label }}
 						{{ form.search_content }}
