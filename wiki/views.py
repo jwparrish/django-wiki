@@ -76,7 +76,19 @@ def edit_page(request, page_name):
 			f = SearchForm(request.POST)
 			variables = search_page(request, f)
 			return render_to_response("search.html", variables)
+		elif "newpage" in request.POST:
+			f = SearchForm(request.POST)
+			np = NewPageForm()
+			newpagename = request.POST["text"]
+			try: 
+				page= Page.objects.get(pk=newpagename)
+				tags = page.tags.all()
+				content = page.content
+				return render_to_response("view.html", {"page_name" : newpagename, "content": content, "tags":tags, "form":f, "newpageform": np}, RequestContext(request))
+			except Page.DoesNotExist:
+				return render_to_response("create.html", {"newpagename": newpagename, "form": f, "newpageform": np}, RequestContext(request))
 	f = SearchForm()
+	np = NewPageForm()
 	try:
 		page = Page.objects.get(pk=page_name)
 		content = page.content
@@ -84,7 +96,7 @@ def edit_page(request, page_name):
 	except Page.DoesNotExist:
 		content = ""
 		tags = ""
-	return render_to_response("edit.html", {"page_name": page_name, "content": content, "tags": tags, "form":f}, RequestContext(request))
+	return render_to_response("edit.html", {"page_name": page_name, "content": content, "tags": tags, "form":f, "newpageform": np}, RequestContext(request))
 	
 def save_page(request, page_name):
 	content = request.POST["content"]
@@ -112,6 +124,17 @@ def view_tag(request, tag_name):
 			f = SearchForm(request.POST)
 			variables = search_page(request, f)
 			return render_to_response("search.html", variables)
+		elif "newpage" in request.POST:
+			f = SearchForm(request.POST)
+			np = NewPageForm()
+			newpagename = request.POST["text"]
+			try: 
+				page= Page.objects.get(pk=newpagename)
+				tags = page.tags.all()
+				content = page.content
+				return render_to_response("view.html", {"page_name" : newpagename, "content": content, "tags":tags, "form":f, "newpageform": np}, RequestContext(request))
+			except Page.DoesNotExist:
+				return render_to_response("create.html", {"newpagename": newpagename, "form": f, "newpageform": np}, RequestContext(request))
 	f = SearchForm()
 	tag = Tag.objects.get(pk=tag_name)
 	pages = tag.page_set.all()
