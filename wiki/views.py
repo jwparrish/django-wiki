@@ -41,8 +41,9 @@ def view_page(request, page_name):
 	if request.method == "POST":
 		if "searchbar" in request.POST:
 			f = SearchForm(request.POST)
+			np = NewPageForm()
 			variables = search_page(request, f)
-			return render_to_response("search.html", variables)
+			return render_to_response("search.html", {"newpageform": np}, variables)
 		elif "newpage" in request.POST:
 			f = SearchForm(request.POST)
 			np = NewPageForm()
