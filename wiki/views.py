@@ -10,7 +10,7 @@ class SearchForm(forms.Form):
 	search_content = forms.BooleanField(label="Search content", required=False)
 	
 class NewPageForm(forms.Form):
-	text = forms.CharField(label="Create Page:", max_length=100)
+	text = forms.CharField(label="", max_length=100)
 
 """ LEGACY
 def search_page(request):

@@ -20,7 +20,7 @@
 				<div id="newpagedialog">
 					<form method="post" action="">{% csrf_token %}
 						<span class="cancelbutton">cancel</span>
-						{{ newpageform }}
+						<span class="createpagebox">{{ newpageform }}</span>
 						<input type="submit" name="newpage" value="create" />
 					</form>
 				</div>

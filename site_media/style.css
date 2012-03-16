@@ -58,11 +58,12 @@ hr {
 #newpagedialog {
 	position: absolute;
 	background: #FFF;
+	background-image:url('createpagewindow.png');
 	color: #000;
-	height: 100px;
-	width: 300px;
+	height:213px;
+	width: 421px;
 	margin: 50px 0 0 100px;
-	outline: 3px solid #F00;
+	/*outline: 3px solid #F00;*/
 }
 
 .addpagebutton {
@@ -76,5 +77,10 @@ hr {
 
 .cancelbutton {
 	float: right;
+	margin-right: 15px;
 	text-size: 70%;
+}
+
+.createpagebox {
+	margin-left: 10px;
 }
