@@ -75,12 +75,13 @@ hr {
 	float: left;
 }
 
-.cancelbutton {
+.closebutton {
 	float: right;
-	margin-right: 15px;
+	margin: 3px 9px 0 5px;
 	text-size: 70%;
 }
 
 .createpagebox {
 	margin-left: 10px;
 }
+

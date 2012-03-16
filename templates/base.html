@@ -16,12 +16,12 @@
 				<div id="nav">
 					<span class="label">Menu:</span> <a href="/wiki/page/Start/">Start Page</a> 
 				</div>
-				<div><a href="#" class="addpagebutton" style="text-decoration:none;"><img src="/site_media/createpage.jpg"/ alt="Create Page"></a></div>
+				<div><a href="#" class="addpagebutton" style="text-decoration:none;"><img src="/site_media/createpage.jpg" alt="Create Page" style="margin-top: 2px;"/></a></div>
 				<div id="newpagedialog">
 					<form method="post" action="">{% csrf_token %}
-						<span class="cancelbutton">cancel</span>
 						<span class="createpagebox">{{ newpageform }}</span>
 						<input type="submit" name="newpage" value="create" />
+						<span class="closebutton"><a href="#" class="closebutton"><img src="/site_media/closebutton.png" alt="cancel"/></a></span>
 					</form>
 				</div>
 				
