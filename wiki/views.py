@@ -42,8 +42,13 @@ def view_page(request, page_name):
 		if "searchbar" in request.POST:
 			f = SearchForm(request.POST)
 			np = NewPageForm()
+<<<<<<< HEAD
 			variables = search_page(request, f)
 			return render_to_response("search.html", {"newpageform": np}, variables)
+=======
+			variables = search_page(request, f, np)
+			return render_to_response("search.html", variables)
+>>>>>>> 30d86681238750fde8c57db42395c7b0d87b8c0d
 		elif "newpage" in request.POST:
 			f = SearchForm(request.POST)
 			np = NewPageForm()
@@ -141,12 +146,13 @@ def view_tag(request, tag_name):
 	pages = tag.page_set.all()
 	return render_to_response("tags.html", {"tag_name": tag_name, "pages": pages, "form": f}, RequestContext(request))
 	
-def search_page(request, f):	
+def search_page(request, f, np):	
 	if not f.is_valid():
 		show_searchbox = True
 		variables = RequestContext(request, {
 			"show_searchbox": show_searchbox,
-			"form": f
+			"form": f,
+			"newpageform": np,
 		})
 		return variables
 	else:
@@ -158,6 +164,7 @@ def search_page(request, f):
 		if pages.exists() or contents.exists():
 			variables = RequestContext(request, {
 				"form": f,
+				"newpageform": np,
 				"pages": pages,
 				"contents": contents
 			})
@@ -169,6 +176,7 @@ def search_page(request, f):
 			variables = RequestContext(request, {
 				"noresults": noresults,
 				"show_searchbox": show_searchbox,
-				"form": f
+				"form": f,
+				"newpageform": np,
 			})
 			return variables
