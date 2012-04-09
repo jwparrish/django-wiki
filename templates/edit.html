@@ -3,7 +3,7 @@
 {% block title %}{{ page_name }} - Editing{% endblock %}
 
 {% block content %}
-		<h3>Editing {{ page_name }}</h3>
+		<h2>Editing {{ page_name }}</h2>
 		<form method="post" action="/wiki/page/{{ page_name }}/save/">
 			{% csrf_token %}
 			<textarea name="content" rows="20" cols="80">{{ content }}</textarea>
