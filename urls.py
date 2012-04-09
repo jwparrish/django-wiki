@@ -17,9 +17,9 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    (r'^wiki/page/(?P<page_name>[^/]+)/edit/$', 'djwiki.wiki.views.edit_page'),
-     (r'^wiki/page/(?P<page_name>[^/]+)/save/$', 'djwiki.wiki.views.save_page'),
-     (r'^wiki/page/(?P<page_name>[^/]+)/$', 'djwiki.wiki.views.view_page'),
-     (r'^wiki/tag/(?P<tag_name>[^/]+)/$', 'djwiki.wiki.views.view_tag'),
+    (r'^wiki/page/(?P<page_name>[^/]+)/edit/$', 'django-wiki.wiki.views.edit_page'),
+     (r'^wiki/page/(?P<page_name>[^/]+)/save/$', 'django-wiki.wiki.views.save_page'),
+     (r'^wiki/page/(?P<page_name>[^/]+)/$', 'django-wiki.wiki.views.view_page'),
+     (r'^wiki/tag/(?P<tag_name>[^/]+)/$', 'django-wiki.wiki.views.view_tag'),
      (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', { 'document_root': site_media }),
 )

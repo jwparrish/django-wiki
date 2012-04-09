@@ -1,4 +1,4 @@
-from djwiki.wiki.models import Page, Tag
+from wiki.models import Page, Tag
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
@@ -12,43 +12,13 @@ class SearchForm(forms.Form):
 class NewPageForm(forms.Form):
 	text = forms.CharField(label="", max_length=100)
 
-""" LEGACY
-def search_page(request):
-	if request.method == "POST":
-		f = SearchForm(request.POST)
-		if not f.is_valid():
-			return render_to_response("search.html", {"form":f}, RequestContext(request))
-		else:
-			try:
-				pages = Page.objects.filter(name__contains = f.cleaned_data["text"])
-				contents = []
-				#if f.cleaned_data["search_content"]:
-				#	contents = Page.objects.filter(content__contains = f.cleaned_data["text"])
-				return render_to_response("search.html", {"form":f, "pages": pages, "contents": contents}, RequestContext(request))
-			except Page.DoesNotExist:
-				f = SearchForm()
-				show_searchbox = True
-				noresults = True
-				return render_to_response("search.html", {"noresults": noresults, "show_searchbox": show_searchbox, "form":f}, RequestContext(request))
-			
-	f = SearchForm()
-	show_searchbox = True
-	return render_to_response("search.html", {"show_searchbox": show_searchbox, "form":f}, RequestContext(request))
-"""	
-#specialPages = {"SearchPage": search_page}
-
 def view_page(request, page_name):
 	if request.method == "POST":
 		if "searchbar" in request.POST:
 			f = SearchForm(request.POST)
 			np = NewPageForm()
-<<<<<<< HEAD
-			variables = search_page(request, f)
-			return render_to_response("search.html", {"newpageform": np}, variables)
-=======
 			variables = search_page(request, f, np)
-			return render_to_response("search.html", variables)
->>>>>>> 30d86681238750fde8c57db42395c7b0d87b8c0d
+			return render_to_response("search.html", {"newpageform": np}, variables)
 		elif "newpage" in request.POST:
 			f = SearchForm(request.POST)
 			np = NewPageForm()
@@ -61,11 +31,6 @@ def view_page(request, page_name):
 			except Page.DoesNotExist:
 				return render_to_response("create.html", {"newpagename": newpagename, "form": f, "newpageform": np}, RequestContext(request))
 				
-			
-	#if page_name in specialPages:
-	#	return specialPages[page_name](request)
-	
-	
 	f = SearchForm()
 	np = NewPageForm()
 	try:
@@ -80,7 +45,8 @@ def edit_page(request, page_name):
 	if request.method == "POST":
 		if "searchbar" in request.POST:
 			f = SearchForm(request.POST)
-			variables = search_page(request, f)
+			np = NewPageForm()
+			variables = search_page(request, f, np)
 			return render_to_response("search.html", variables)
 		elif "newpage" in request.POST:
 			f = SearchForm(request.POST)
@@ -128,7 +94,8 @@ def view_tag(request, tag_name):
 	if request.method == "POST":
 		if "searchbar" in request.POST:
 			f = SearchForm(request.POST)
-			variables = search_page(request, f)
+			np = NewPageForm()
+			variables = search_page(request, f, np)
 			return render_to_response("search.html", variables)
 		elif "newpage" in request.POST:
 			f = SearchForm(request.POST)
